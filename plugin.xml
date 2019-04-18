@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android"   
+    id="cordova-plugin-image-view" 
+    version="0.0.4">
+    <name>ImageView</name>
+    <description>Cordova Plugin ImageView</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,image</keywords>
+    <repo>https://github.com/laborchu/cordova-plugin-image-view</repo>
+    <issue>https://github.com/laborchu/cordova-plugin-image-view/issues</issue>
+    
+    <js-module name="ImageView" src="www/imageView.js">
+      <clobbers target="imageView"/>
+    </js-module>
+
+    
+    <dependency id="cordova-plugin-cocoapod-support"/>
+
+    <platform name="android">
+
+      <config-file target="res/xml/config.xml" parent="/*">
+          <feature name="ImageView">
+              <param name="android-package" value="org.apache.cordova.imageview.ImageView"/>
+              <param name="onload" value="true" />
+          </feature>
+      </config-file>
+      
+      <source-file src="src/android/ImageView.java" target-dir="src/org/apache/cordova/imageview"/>
+      <framework src="src/android/imageview.gradle" custom="true" type="gradleReference"/>
+    </platform>
+
+    <platform name="ios">
+    
+        <config-file target="config.xml" parent="/*">
+          <feature name="ImageView">
+              <param name="ios-package" value="ImageView"/>
+          </feature>
+        </config-file>
+
+        <framework src="YBImageBrowser" type="podspec" spec="~> 2.1.5"/>
+        <framework src="SDWebImage" type="podspec" spec="4.4.6"/>
+      
+        <resource-file src="src/ios/YBImageBrowser.bundle" />
+
+        <source-file src="src/ios/ImageView.m"/>
+        <source-file src="src/ios/ImageView.h"/>
+    </platform>
+</plugin>
